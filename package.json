@@ -1,0 +1,22 @@
+{
+  "name": "Parse_todo",
+  "version": "1.2.7",
+  "description": "",
+  "main": "",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nonlogos/parse_todo"
+  },
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
+    "angular-messages": "^1.5.5",
+    "angular-material": "git+https://github.com/angular/bower-material.git#master"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.9",
+    "live-server": "^0.9.1"
+  }
+}

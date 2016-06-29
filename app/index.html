@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>Todo List with Parse</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="assets/app.css"/>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+  </head>
+
+  <body ng-app="myApp" ng-controller="todoCtrl">
+    <div class="container">
+
+        <h2>My Todo List</h2>
+
+        <form ng-submit="todoAdd()">
+            <input type="text" ng-model="todoInput" size="50" placeholder="Add New">
+            <input type="submit" value="Add New">
+        </form>
+
+        <br>
+
+        <div ng-repeat="x in todoList">
+            <input type="checkbox" ng-model="x.done"> <span ng-bind="x.todoText"></span>
+        </div>
+
+        <p><button ng-click="remove()">Remove marked</button></p>
+    </div>
+        
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-animate/angular-animate.js"></script>
+    <script src="../node_modules/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="../node_modules/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="https://parse.com/downloads/javascript/parse-1.6.14.min.js"></script>
+
+    <script src="./src/app.js"></script>
+
+  </body>
+</html>
