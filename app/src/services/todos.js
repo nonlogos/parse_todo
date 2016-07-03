@@ -4,26 +4,27 @@
   angular.module('myApp')
          .factory('todos', function() {
 
-      var addTodos = function(newTodoItem) {
-          var Obj = Parse.Object.extend("todos");
-          var newTodos = new Obj();
+    const addTodos = function(newTodoItem) {
+        var Obj = Parse.Object.extend("todos");
+        var newTodos = new Obj();
 
-          newTodos.set("todoItem", newTodoItem);
-          newTodos.set("done", false);
+        newTodos.set("todoItem", newTodoItem);
+        newTodos.set("done", false);
 
-          return newTodos.save()
-          .then(function(result) {
-            var newObj = {};
-            newObj.id = result.id;
-            newObj.todoText = result.get('todoItem');
-            newObj.done = result.get('done');
-            return newObj;
-          }, function(error) {
-            console.log(error)
-          })
-      };   
+        return newTodos.save()
+        .then(function(result) {
+          var newObj = {};
+          newObj.id = result.id;
+          newObj.todoText = result.get('todoItem');
+          newObj.done = result.get('done');
+          console.log('service addnew', newObj)
+          return newObj;
+        }, function(error) {
+          console.log(error)
+        })
+    };   
 
-    let saveStatus = (id, status) => {
+    const saveStatus = (id, status) => {
       const objSave = Parse.Object.extend("todos");
       let updStatus = new objSave();
       updStatus.id = id;
@@ -38,7 +39,7 @@
 
 //Deleting todo items
 
-    var deleteTodos = function(deletedList) {
+    const deleteTodos = function(deletedList) {
       var deleteDate = new Date();
       var Todo = Parse.Object.extend("todos");
       
@@ -58,7 +59,7 @@
     }
 
 //Pulling todo items from DB
-    var getTodos = function() {
+    const getTodos = function() {
       var TodoList = Parse.Object.extend('todos');
       var Query = new Parse.Query(TodoList);
 
@@ -82,7 +83,7 @@
           }) 
       })
     };   
-
+    
     return {
       addTodos: addTodos,
       getTodos: getTodos,

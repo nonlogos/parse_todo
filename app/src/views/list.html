@@ -1,16 +1,30 @@
  <main>
     <h2>My Todo List</h2>
 
-    <form ng-submit="todoAdd()">
-        <input type="text" ng-model="todoInput" size="50" placeholder="Add New">
-        <input type="submit" value="Add New">
+    <form name="newTodo" novalidate ng-submit="todoAdd()">
+       <md-input-container class="mid-block fullwidth">
+            <label>Add a new todo task</label>
+            <input type="text" ng-model="newTodo.todoInput" minlength="1" />
+            <div ng-messages="newTodo.todoInput.$error">
+                <div ng-message-exp="['required', minlength]">Please enter a new todo task</div>
+            </div>
+        </md-input-container>
+        <input type="submit" value="Add New" class="submit-button" ng-disabled="newTodo.invalid">
     </form>
-
     <br>
 
-    <div ng-repeat="x in todoList">
-        <input type="checkbox" ng-model="x.done" ng-click="saveToggleState()"> <span ng-bind="x.todoText"></span>
-    </div>
-
-    <p><button ng-click="remove()">Remove marked</button></p>
+    <md-list class="todo-list">
+            <md-list-item class="md-2-line todo-item" ng-repeat="x in todoList">
+                <md-checkbox ng-model="x.done" ng-change=saveToggleState()></md-checkbox>
+                <div class="md-list-item-text">
+                  <p>{{x.todoText}}</p>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+          </md-list-item>
+    </md-list>
+    
+    <hr>    
+    <md-button ng-click="remove()">Remove marked</md-button>
+    <md-button ng-click="signOut()">Sign Out</md-button>
 </main>
+

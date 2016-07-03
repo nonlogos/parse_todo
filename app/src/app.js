@@ -1,11 +1,7 @@
 
 (function () {
     'use strict'
-    angular.module('myApp', ['ui.router'])
-    .run(function(todos) {
-            Parse.initialize('keyitup', 'unused');
-            Parse.serverURL = 'http://localhost:1337/parse';
-        })
+    angular.module('myApp', ['ui.router', 'ngMaterial'])
     .config(function($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise("/home");
 
@@ -34,6 +30,26 @@
                     controller: 'todoCtrl',
                     controllerAs: 'todos',
                 }) 
+                .state('error', {
+                    url: '/error',
+                    templateUrl: 'src/views/error.html',
+                    controller: 'errorCtrl',
+                })
+    })
+    .run(function(todos, oAuth, $rootScope, $location) {
+        Parse.initialize('keyitup', 'unused');
+        Parse.serverURL = 'http://localhost:1337/parse';
+
+        $rootScope.$on( "$locationChangeStart", function(event, next, current) {
+            let isAuth = oAuth.isAuthenticated();
+            console.log('isAuth', isAuth)
+            if(!isAuth || isAuth === "null") {
+                console.log('not logged in')
+                $location.path('/home');
+            } else {
+                console.log('logged in')
+            }
         });
+    })
 
  })();   

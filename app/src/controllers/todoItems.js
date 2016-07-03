@@ -1,23 +1,23 @@
 angular.module('myApp')
-	.controller('todoCtrl', function($scope, todos, $timeout) {
+	.controller('todoCtrl', function($scope, $timeout, todos, oAuth) {
 		console.log("it's working")
     $scope.todoList = [];
     
     $scope.todoAdd = function() {
-        var newTodo = $scope.todoInput;
+        var newTodo = $scope.newTodo.todoInput;
         todos.addTodos(newTodo)
         .then(function(result) {
             $scope.todoList[0].id = result.id;
-
         });
-
+        $scope.newTodo.todoInput = '';
         $scope.todoList.unshift({todoText: newTodo});
 
-        $scope.todoInput = "";
+        // $scope.newTodo.todoInput = "";
     };
 
     //function to keep track of checked state of todo item
     $scope.saveToggleState = function() {
+        console.log('id', this.x.id, 'done', this.x.done)
         var done = this.x.done;
         var id = this.x.id;
         todos.saveStatus(id, done);
@@ -33,6 +33,10 @@ angular.module('myApp')
             todos.deleteTodos(deletedList);
         });
     };
+
+    $scope.signOut = () => {
+        oAuth.signOut();
+    }
     
     this.$onInit = function() {
         todos.getTodos()
