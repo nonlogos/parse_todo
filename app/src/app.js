@@ -1,7 +1,7 @@
 
 (function () {
     'use strict'
-    angular.module('myApp', ['ui.router', 'ngMaterial'])
+    angular.module('myApp', ['ui.router', 'ngMaterial', 'ngStorage'])
     .config(function($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise("/home");
 
@@ -12,8 +12,8 @@
                     controller: 'loginCtrl',
                     controllerAs: 'login',
                 })
-                .state('signUp', {
-                    url: '/signUp',
+                .state('signup', {
+                    url: '/signup',
                     templateUrl: 'src/views/signUp.html',
                     controller: 'signUpCtrl',
                     controllerAs: 'signUp',
@@ -40,15 +40,18 @@
         Parse.initialize('keyitup', 'unused');
         Parse.serverURL = 'http://localhost:1337/parse';
 
-        $rootScope.$on( "$locationChangeStart", function(event, next, current) {
+        $rootScope.$on( "$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
             let isAuth = oAuth.isAuthenticated();
+            console.log('toState', toState.name)
+            console.log('fromstate', fromState.name)
             console.log('isAuth', isAuth)
-            if(!isAuth || isAuth === "null") {
+            if(toState.name === 'signup' || fromState.name === 'signup' || toState.name === 'error' || fromState.name === 'error') {
+                console.log('working')
+                $location.path(toState.name);
+            } else if(!isAuth || isAuth === "null" ) {
                 console.log('not logged in')
                 $location.path('/home');
-            } else {
-                console.log('logged in')
-            }
+            } 
         });
     })
 

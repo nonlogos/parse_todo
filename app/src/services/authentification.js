@@ -14,6 +14,7 @@
 			.then(function(result) {
 				$window.location.href= '#/todoLists/list'
 			}, function(error){
+				console.log('error', error)
 				oAuthError = error.message;
 				$window.location.href='#/error';
 			})
@@ -30,6 +31,7 @@
 				return result;
 			}, function(error) {
 				console.error(error);
+				return error;
 			})
 
 		}

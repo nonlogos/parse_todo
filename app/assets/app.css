@@ -27,6 +27,13 @@ html, body {
   width: 100%;
 }
 
+.alertMsg {
+  margin-top: 20px;
+  background: lightcoral;
+  color: white;
+  padding: 20px;
+}
+
 
 /* Sign up form Styles */
 .signup-form input.ng-invalid.ng-touched {

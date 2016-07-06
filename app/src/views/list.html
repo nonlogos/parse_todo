@@ -4,7 +4,7 @@
     <form name="newTodo" novalidate ng-submit="todoAdd()">
        <md-input-container class="mid-block fullwidth">
             <label>Add a new todo task</label>
-            <input type="text" ng-model="newTodo.todoInput" minlength="1" />
+            <input type="text" ng-model="newTodo.todoInput" minlength="3" />
             <div ng-messages="newTodo.todoInput.$error">
                 <div ng-message-exp="['required', minlength]">Please enter a new todo task</div>
             </div>

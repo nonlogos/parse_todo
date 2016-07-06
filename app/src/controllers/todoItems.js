@@ -9,6 +9,7 @@ angular.module('myApp')
         .then(function(result) {
             $scope.todoList[0].id = result.id;
         });
+
         $scope.newTodo.todoInput = '';
         $scope.todoList.unshift({todoText: newTodo});
 
